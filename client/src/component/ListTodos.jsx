@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import EditTodo from "./EditTodo";
+
 const ListTodos = () => {
 
     const [todos, setTodos] = useState([]);
@@ -11,11 +13,21 @@ const ListTodos = () => {
                 method: "DELETE",
             });
             
-            console.log(deleteTodo);
+            setTodos(todos.filter(todo => todo.todo_id !== id));
         } catch (err) {
             console.error(err.message);
         }
     };
+
+    //edit todo
+
+    const editTodoOnClick = async () => {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 
     //get all todos
     const getAllTodos = async () => {
@@ -40,7 +52,7 @@ const ListTodos = () => {
 
     useEffect(() => {
         getAllTodos();
-    },);
+    },[]);
 
     return (
         <>
@@ -50,7 +62,7 @@ const ListTodos = () => {
                         <>
                             <li key={todo.todo_id}>
                                 {todo.description}
-                                <button>edit</button>
+                                <button>Edit</button>
                                 <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
                             </li>
                         </>
