@@ -17,6 +17,10 @@ const InputTodo = () => {
 
             console.log(response);
 
+            //quick fix but I don't like this solution
+            //maybe use the spread operator and add the new todo to the existing array
+            window.location = "/";
+
             //clean input
 
             setDescription("");
@@ -29,7 +33,7 @@ const InputTodo = () => {
         <>
             <h1>Pern Todo List</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="todo"></label>
+                <label htmlFor="description"></label>
                 <input 
                     type="text" 
                     id="description" 
