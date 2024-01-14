@@ -1,10 +1,15 @@
-import './App.css'
+import InputTodo from './component/inputTodo';
+import "./App.css";
 
 function App() {
 
   return (
     <>
-      <h1>Hello world!</h1>
+      <InputTodo />
+      <form>
+        <input type="text" className="form-control"></input>
+        <button type="submit" className='btn btn-success'>Add Todo</button>
+      </form>
     </>
   )
 }
