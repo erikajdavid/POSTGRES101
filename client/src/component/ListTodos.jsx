@@ -26,7 +26,7 @@ const ListTodos = () => {
 
     useEffect(() => {
         getAllTodos();
-    }, []);
+    },);
 
     return (
         <>
@@ -34,11 +34,12 @@ const ListTodos = () => {
                 {todos.map((todo) => {
                     return (
                         <>
-                            <li key={todo.id}>{todo.description}</li>
+                            <li key={todo.todo_id}>{todo.description}</li>
                             <button>edit</button>
                             <button>delete</button>
                         </>
                     )
+
                 })};
             </ul>
         </>
