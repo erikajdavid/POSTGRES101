@@ -19,16 +19,6 @@ const ListTodos = () => {
         }
     };
 
-    //edit todo
-
-    const editTodoOnClick = async () => {
-        try {
-            
-        } catch (error) {
-            
-        }
-    }
-
     //get all todos
     const getAllTodos = async () => {
         try {
@@ -59,13 +49,11 @@ const ListTodos = () => {
             <ul>
                 {todos.map((todo) => {
                     return (
-                        <>
-                            <li key={todo.todo_id}>
-                                {todo.description}
-                                <button>Edit</button>
-                                <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
-                            </li>
-                        </>
+                        <li key={todo.todo_id}>
+                            {todo.description}
+                            <button>Edit</button>
+                            <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
+                        </li>
                     )
                 })}
             </ul>
