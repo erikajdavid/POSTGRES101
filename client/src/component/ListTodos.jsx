@@ -49,9 +49,9 @@ const ListTodos = () => {
             <ul>
                 {todos.map((todo) => {
                     return (
-                        <li key={todo.todo_id}>
+                        <li key={todo.todo_id} className="listContainer">
+                            <EditTodo />
                             {todo.description}
-                            <button>Edit</button>
                             <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
                         </li>
                     )
