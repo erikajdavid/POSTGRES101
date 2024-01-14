@@ -34,13 +34,14 @@ const ListTodos = () => {
                 {todos.map((todo) => {
                     return (
                         <>
-                            <li key={todo.todo_id}>{todo.description}</li>
-                            <button>edit</button>
-                            <button>delete</button>
+                            <li key={todo.todo_id}>
+                                {todo.description}
+                                <button>edit</button>
+                                <button>delete</button>
+                            </li>
                         </>
                     )
-
-                })};
+                })}
             </ul>
         </>
     );
