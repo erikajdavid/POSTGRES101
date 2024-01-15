@@ -32,7 +32,8 @@ const ListTodos = () => {
             };
 
             const data = await response.json();
-            setTodos(data);
+            const orderedTodos = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            setTodos(orderedTodos);
             console.log(data);
             
         } catch (err) {
@@ -47,15 +48,15 @@ const ListTodos = () => {
     return (
         <>
             <ul>
-                {todos.map((todo) => {
-                    return (
-                        <li key={todo.todo_id} className="listContainer">
-                            <EditTodo />
-                            {todo.description}
-                            <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
-                        </li>
-                    )
-                })}
+            {todos.map((todo) => {
+                return (
+                    <li key={todo.todo_id} className="listContainer">
+                        <EditTodo id={todo.todo_id} completed={todo.completed} />
+                        {todo.description}
+                        <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
+                    </li>
+                );
+            })}
             </ul>
         </>
     );
