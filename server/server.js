@@ -18,17 +18,19 @@ app.use(express.json()); //allows to parse to JSON data // req.body
 //create a todo
 
 app.post("/todos", async (req, res) => {
-    try {
-      //console.log(req.body);
-      const { description } = req.body;
-      const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *", [description]);
+  try {
+    const { description, completed } = req.body;
 
-      res.json(newTodo.rows[0]);
+    // If 'completed' is not provided in the request body, default it to false
+    const newTodo = await pool.query("INSERT INTO todo (description, completed) VALUES($1, COALESCE($2, false)) RETURNING *", [description, completed]);
 
-    } catch (err) {
-      console.error(err.message);
-    }
-  });
+    res.json(newTodo.rows[0]);
+
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 
 //get all todos
 
@@ -60,16 +62,20 @@ app.get("/todos/:id", async (req, res) => {
 app.put("/todos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { description } = req.body;
-    const updateTodo = await pool.query("UPDATE todo SET description = $1 WHERE todo_id = $2 RETURNING *",
-    [description, id]);
+    const { completed } = req.body; // Use 'completed' instead of 'description'
+    
+    const updateTodo = await pool.query(
+      "UPDATE todo SET completed = $1 WHERE todo_id = $2 RETURNING *",
+      [completed, id]
+    );
 
     res.json(updateTodo.rows[0]);
-
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 //delete a todo
 app.delete("/todos/:id", async (req, res) => {
