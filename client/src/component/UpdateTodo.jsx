@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 
-const EditTodo = ({ id, completed }) => {
+const UpdateTodo = ({ id, completed }) => {
   const [isComplete, setIsComplete] = useState(completed);
 
   const handleToggleComplete = async () => {
@@ -37,4 +37,4 @@ const EditTodo = ({ id, completed }) => {
   );
 };
 
-export default EditTodo;
+export default UpdateTodo;

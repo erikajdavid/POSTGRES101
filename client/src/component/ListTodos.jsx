@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import EditTodo from "./EditTodo";
+import UpdateTodo from "./UpdateTodo";
 
 const ListTodos = () => {
 
@@ -51,7 +51,7 @@ const ListTodos = () => {
             {todos.map((todo) => {
                 return (
                     <li key={todo.todo_id} className="listContainer">
-                        <EditTodo id={todo.todo_id} completed={todo.completed} />
+                        <UpdateTodo id={todo.todo_id} completed={todo.completed} />
                         {todo.description}
                         <button onClick={() => deleteTodoOnClick(todo.todo_id)}>delete</button>
                     </li>
