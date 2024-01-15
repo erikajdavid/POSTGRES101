@@ -2,24 +2,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 
-const EditTodo = () => {
-    const [complete, setComplete] = useState(false);
+const EditTodo = ({ id, completed }) => {
+  const [isComplete, setIsComplete] = useState(completed);
 
-    const handleToggleComplete = () => {
-        setComplete(!complete);
-    };
+  const handleToggleComplete = async () => {
+    try {
+      // Toggle the completed status locally
+      setIsComplete(!isComplete);
 
-    return (
-        <>
-            <div onClick={handleToggleComplete}>
-                {complete ? (
-                    <FontAwesomeIcon icon={faCheckCircle} />
-                ) : (
-                    <FontAwesomeIcon icon={faCircle} />
-                )}
-            </div>
-        </>
-    );
-}
+      await fetch(`http://localhost:5000/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          completed: !isComplete,
+        }),
+      });
+    } catch (error) {
+      console.error('Error toggling completion status:', error);
+    }
+  };
+
+  return (
+    <>
+      <div onClick={handleToggleComplete}>
+        {isComplete ? (
+          <FontAwesomeIcon icon={faCheckCircle} />
+        ) : (
+          <FontAwesomeIcon icon={faCircle} />
+        )}
+      </div>
+    </>
+  );
+};
 
 export default EditTodo;
