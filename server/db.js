@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const Pool = require("pg").Pool;
 
 const pool = new Pool({
@@ -10,13 +8,6 @@ const pool = new Pool({
     database: process.env.PSQL_DATABASE
 });
 
-//console to make sure the values are correct and to help debug
-
-console.log("Connecting to PostgreSQL with the following details:");
-console.log("User:", process.env.PSQL_USER);
-console.log("Password:", process.env.PSQL_PWD);
-console.log("Host:", process.env.PSQL_HOST);
-console.log("Port:", process.env.PSQL_PORT);
-console.log("Database:", process.env.PSQL_DATABASE);
+//if facing errors with connection, console.log the values to debug
 
 module.exports = pool;

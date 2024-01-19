@@ -3,7 +3,6 @@ const router = express.Router();
 const pool = require("./db")
 
 //create a todo
-
 router.post("/todos", async (req, res) => {
     try {
       const { description, completed } = req.body;
@@ -18,9 +17,7 @@ router.post("/todos", async (req, res) => {
     }
   });
   
-  
   //get all todos
-  
   router.get("/todos", async (req, res) => {
     try {
       const allTodos = await pool.query("SELECT * FROM todo");
@@ -49,7 +46,7 @@ router.post("/todos", async (req, res) => {
   router.put("/todos/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const { completed } = req.body; // Use 'completed' instead of 'description'
+      const { completed } = req.body; 
       
       const updateTodo = await pool.query(
         "UPDATE todo SET completed = $1 WHERE todo_id = $2 RETURNING *",
@@ -62,7 +59,6 @@ router.post("/todos", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
-  
   
   //delete a todo
   router.delete("/todos/:id", async (req, res) => {
